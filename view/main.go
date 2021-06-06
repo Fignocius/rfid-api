@@ -19,11 +19,11 @@ func main() {
 	}
 	defer db.Close()
 
-	trackingHandler := handler.NewTrackingHandler(db)
+	productHandler := handler.NewProductHandler(db)
 
 	e := echo.New()
 	e.Use(mw.Logger())
 	e.Use(mw.Recover())
-	e.GET("/view/:code", trackingHandler.View)
+	e.GET("/view", productHandler.View)
 	e.Logger.Fatal(e.Start(":8080"))
 }

@@ -6,22 +6,22 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-// Tracking struct repository
-type Tracking struct {
+// Product struct repository
+type Product struct {
 	db *sqlx.DB
 }
 
-// NewTracking function to instance new tracking
-func NewTracking(db *sqlx.DB) TrackingRepository {
-	return &Tracking{
+// NewProduct function to instance new Product
+func NewProduct(db *sqlx.DB) ProductRepository {
+	return &Product{
 		db: db,
 	}
 }
 
-// Get function to get fields of the tracking
-func (t Tracking) Get(code string) (tracking model.Tracking, err error) {
+// Get function to get fields of the Product
+func (t Product) Get(code string) (product model.Product, err error) {
 	query := psql.Select("*").
-		From("trackings").
+		From("product").
 		Where(sq.Eq{"code": code})
 
 	statement, args, err := query.ToSql()
@@ -32,7 +32,7 @@ func (t Tracking) Get(code string) (tracking model.Tracking, err error) {
 	if err != nil {
 		return
 	}
-	if err = stmt.Get(&tracking, args...); err != nil {
+	if err = stmt.Get(&product, args...); err != nil {
 		return
 	}
 	err = stmt.Close()

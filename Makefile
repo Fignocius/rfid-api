@@ -40,7 +40,7 @@ golang-migrate:
 
 migrate: golang-migrate
 	# Connection string parameters documentation: https://godoc.org/github.com/lib/pq#hdr-Connection_String_Parameters
-	# Usage: DATABASE_URL=postgres://olist:olist@localhost/microsservices_test?sslmode=disable make migrate
+	# Usage: DATABASE_URL=postgres://rfid:rfid@localhost/rfid-api?sslmode=disable make migrate
 	migrate -path migrations/ -database ${DATABASE_URL} up
 
 migration: golang-migrate

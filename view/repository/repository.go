@@ -7,7 +7,7 @@ import (
 
 var psql = sq.StatementBuilder.PlaceholderFormat(sq.Dollar)
 
-// TrackingRepository is a interface of repository
-type TrackingRepository interface {
-	Get(code string) (model.Tracking, error)
+// ProductRepository is a interface of repository
+type ProductRepository interface {
+	Get(code string) (model.Product, error)
 }

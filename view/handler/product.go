@@ -24,7 +24,7 @@ func NewProductHandler(db *sqlx.DB) ProductHandler {
 // View is a function to View the Product status
 func (t Product) View(c echo.Context) error {
 	request := model.ProductRequest{}
-	err := c.Bind(request)
+	err := c.Bind(&request)
 	if err != nil {
 		return echo.ErrBadRequest
 	}

@@ -37,10 +37,10 @@ func (t Product) Find(request model.ProductRequest) (products []model.ProductRes
 			products = append(products, newProduct)
 			continue
 		}
-		for _, c := range products {
+		for i, c := range products {
 			if strings.EqualFold(code, c.Product.Code) {
-				c.Quantity++
-				c.CalcValue()
+				products[i].IncrementQtd()
+				products[i].CalcValue()
 				hasCode = true
 			}
 		}

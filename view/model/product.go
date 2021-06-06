@@ -8,12 +8,12 @@ import (
 )
 
 type Product struct {
-	ID        uuid.UUID `json:"id" db:"id"`
-	Code      string    `json:"code" db:"code"`
-	Name      string    `json:"name" db:"name"`
-	Value     int64     `json:"value" db:"value"`
-	CreatedAt time.Time `json:"created_at" db:"created_at"`
-	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
+	ID        uuid.UUID  `json:"id" db:"id"`
+	Code      string     `json:"code" db:"code"`
+	Name      string     `json:"name" db:"name"`
+	Value     int64      `json:"value" db:"value"`
+	CreatedAt time.Time  `json:"created_at" db:"created_at"`
+	UpdatedAt *time.Time `json:"updated_at" db:"updated_at"`
 }
 
 func (m Product) String() string {
@@ -42,6 +42,10 @@ func (m ProductResponse) String() string {
 	return string(b)
 }
 
-func (m ProductResponse) CalcValue() {
+func (m *ProductResponse) CalcValue() {
 	m.TotalValue = m.Quantity * m.Product.Value
+}
+
+func (m *ProductResponse) IncrementQtd() {
+	m.Quantity = m.Quantity + 1
 }

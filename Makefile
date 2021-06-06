@@ -21,11 +21,8 @@ build: build-command
 
 build-command:
 	# Running on windows set env to linux builder $Env:GOOS = "linux"; $Env:GOARCH = "amd64"; $Env:CGO_ENABLED = 0
-	$(LINUX_AMD64) go build -o update/update ./update/main.go
-	$(LINUX_AMD64) go build -o create/create ./create/main.go
 	$(LINUX_AMD64) go build -o view/view ./view/main.go
-	$(LINUX_AMD64) go build -o client/client ./client/main.go
-
+	
 build-image:
 	@make deps
 	@make build
@@ -40,7 +37,7 @@ golang-migrate:
 
 migrate: golang-migrate
 	# Connection string parameters documentation: https://godoc.org/github.com/lib/pq#hdr-Connection_String_Parameters
-	# Usage: DATABASE_URL=postgres://rfid:rfid@localhost/rfid-api?sslmode=disable make migrate
+	# Usage: DATABASE_URL=postgres://postgres:postgres@localhost:15432/rfid-api?sslmode=disable make migrate
 	migrate -path migrations/ -database ${DATABASE_URL} up
 
 migration: golang-migrate
